@@ -6,15 +6,18 @@ import { Register } from "./views/Register";
 import ProductList  from "./views/ProductList";
 import {
   BrowserRouter as Router,
+  Routes,
   Route,
-  Routes
 } from "react-router-dom";
 
 const App = () => {
   return (
-    <Routes>
-        <Route path="/"  element={<Home/>} />
-    </Routes>
+    <Router>
+      <Routes>
+        <Route path="/" exact element={<Home/>} />
+         
+      </Routes>
+    </Router>
   );
 };
 
