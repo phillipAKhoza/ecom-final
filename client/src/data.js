@@ -27,16 +27,19 @@ export const categories = [
         id: 1,
         img: "https://i.ibb.co/74PR7K5/pexels-thgusstavo-santana-2114524.jpg",
         title:"SHIRT STYLE!",
+        cat:"shirts",
     },
     {
         id: 2,
         img: "https://i.ibb.co/nPwg5LY/pexels-ksenia-chernaya-4740517.jpg",
         title:"LOUNGEWAER LOVE",
+        cat:"kiddies"
     },
     {
         id: 3,
         img: "https://i.ibb.co/17GnLKH/pexels-monica-turlui-8055369.jpg",
         title:"LIGHT JACKETS",
+        cat:"coats"
     },
 ];
 
