@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import {
     Link,
+    BrowserRouter as Router
   } from "react-router-dom";
 
 const Container = styled.div`
@@ -44,6 +45,7 @@ ${mobile({padding: "15px"})};
 const CategoryItem = ({category}) => {
     return (
         <Container>
+            <Router>
             <Link to={`/products/${category.cat}`}>
             <Image src={category.img}/>
             <Info>
@@ -51,6 +53,7 @@ const CategoryItem = ({category}) => {
                 <Button>SHOP NOW</Button>
             </Info>
             </Link>
+            </Router>
         </Container>
     )
 }
