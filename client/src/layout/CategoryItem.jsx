@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import {
     Link,
-    BrowserRouter as Router
   } from "react-router-dom";
 
 const Container = styled.div`
