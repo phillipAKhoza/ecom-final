@@ -9,7 +9,7 @@ const Container = styled.div`
  justify-content: spaces-between;
 `;
 
-const Products = () => {
+const Products = ({category, filters, sort}) => {
     return (
         <Container>
             {

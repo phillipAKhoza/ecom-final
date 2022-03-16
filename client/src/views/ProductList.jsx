@@ -55,8 +55,7 @@ const ProductList = () => {
             ...filters,
          [e.target.name] : filter,
         });
-    }
-    console.log(filters);
+    };
     return (
         <Container>
             <Navbar/>
@@ -98,7 +97,7 @@ const ProductList = () => {
                     </Select>
                 </Filter>
             </FilterContainer>
-            <Products cat ={category} filters={filters} sort={sort}/>
+            <Products category={category} filters={filters} sort={sort}/>
             <NewsLetter/>
             <Footer/>
         </Container>
