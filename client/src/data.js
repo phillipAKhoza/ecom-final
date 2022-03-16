@@ -27,7 +27,7 @@ export const categories = [
         id: 1,
         img: "https://i.ibb.co/74PR7K5/pexels-thgusstavo-santana-2114524.jpg",
         title:"SHIRT STYLE!",
-        cat:"shirts",
+        cat:"male",
     },
     {
         id: 2,
