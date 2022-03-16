@@ -52,7 +52,7 @@ router.get("/find/:id", async (req,res)=>{
 
 //GET ALL PRODUCTS
 router.get("/", async (req,res)=>{
-    
+    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
     const newQuery = req.query.new;
     const categoryQuery = req.query.category;
 
