@@ -127,7 +127,7 @@ const Footer = () => {
                     <Email style={{marginRight:"10px"}}/>
                     phillipantonk@gmail.com
                 </ContactItem>
-                <Payment src="https://www.classltd.com/wp-content/uploads/2020/05/class-payments.png"/>
+                {/* <Payment src="https://www.classltd.com/wp-content/uploads/2020/05/class-payments.png"/> */}
             </Last>
         </Container>
     )
