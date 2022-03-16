@@ -45,7 +45,6 @@ ${mobile({padding: "15px"})};
 const CategoryItem = ({category}) => {
     return (
         <Container>
-            <Router>
             <Link to={`/products/${category.cat}`}>
             <Image src={category.img}/>
             <Info>
@@ -53,7 +52,6 @@ const CategoryItem = ({category}) => {
                 <Button>SHOP NOW</Button>
             </Info>
             </Link>
-            </Router>
         </Container>
     )
 }
