@@ -58,11 +58,11 @@ const Products = ({category, filters, sort}) => {
         <Container>
             {  category?
                 FilteredProduts.map(product =>(
-                    <Product product={product} key={product.id}/>
+                    <Product product={product} key={product._id}/>
                 ))
                 :
                 produts.slice(0, 8).map(product =>(
-                    <Product product={product} key={product.id}/>
+                    <Product product={product} key={product._id}/>
                 ))
             }
         </Container>
