@@ -1,10 +1,13 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../layout/Announcement";
 import Footer from "../layout/Footer";
 import Navbar from "../layout/Navbar";
 import NewsLetter from "../layout/NewsLetter";
 import { mobile } from "../responsive";
+import {publicRequest} from "../requestAPI";
 
 const Container = styled.div``;
 
@@ -117,39 +120,56 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+    const location = useLocation();
+    const prodID = location.pathname.split("/")[2];
+
+    const [prdct, setPrdct] = useState({});
+
+    useEffect(()=>{
+        const  getProduct = async () =>{
+            try {
+                const dta = await publicRequest.get("/products/find/"+prodID);
+                const data = dta.data;
+                setPrdct(data);
+               
+            } catch (error) {
+                
+            };
+        };
+        getProduct();
+    },[prodID]);
+
     return (
         <Container>
             <Navbar/>
             <Announcement/>
                 <Wrapper>
                     <ImageContainer>
-                        <Image  src="https://cdn.cliqueinc.com/posts/290636/new-pant-trends-2021-290636-1607309167164-main.700x0c.jpg"/>
+                        <Image  src={prdct.img}/>
                     </ImageContainer>
                     <InfoContainer>
-                        <Title>DENIM PANTS</Title>
+                        <Title>{prdct.title}</Title>
                         <Desc>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Aliquam id nulla pharetra, congue mi non, tristique enim.
-                        Aliquam non ligula sit amet dolor pharetra maximus a a nunc.
-                        Etiam nibh mauris, ultricies sit amet volutpat sed, gravida nec ante. 
-                        Nullam vel convallis velit.Quisque sed augue vitae ex dictum dapibus.
+                        {prdct.desc}
                         </Desc>
-                        <Price>R 600</Price>
+                        <Price>R {prdct.price}</Price>
                         <FilterContainer>
                             <Filter>
                                 <FilterTitle>Color</FilterTitle>
-                                <FilterColor color="black"/>
-                                <FilterColor color="darkblue"/>
-                                <FilterColor color="gray"/>
+                                {prdct.color.map((color)=>(
+
+                                    <FilterColor key={color} color={color}/>
+
+                                ))}
                             </Filter>
                             <Filter>
                                 <FilterTitle>Size</FilterTitle>
                                 <FilterSize>
-                                    <FilterSizeOption>XS</FilterSizeOption>
-                                    <FilterSizeOption>S</FilterSizeOption>
-                                    <FilterSizeOption>M</FilterSizeOption>
-                                    <FilterSizeOption>L</FilterSizeOption>
-                                    <FilterSizeOption>XL</FilterSizeOption>
+                                {prdct.size.map((size)=>(
+                                    
+                                    <FilterSizeOption key={size}>{size}</FilterSizeOption>
+                                    
+                                ))}
                                 </FilterSize>
                             </Filter>
                         </FilterContainer>
