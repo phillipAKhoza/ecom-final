@@ -8,6 +8,8 @@ import Navbar from "../layout/Navbar";
 import NewsLetter from "../layout/NewsLetter";
 import { mobile } from "../responsive";
 import {publicRequest} from "../requestAPI";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 
@@ -123,10 +125,11 @@ const Product = () => {
     const location = useLocation();
     const prodID = location.pathname.split("/")[2];
 
-    const [prdct, setPrdct] = useState({});
+    const [products, setPrdct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [size, setSize] = useState("");
     const [color, setColor] = useState("");
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         const  getProduct = async () =>{
@@ -143,7 +146,7 @@ const Product = () => {
     },[prodID]);
 
     const handleQty = (type) =>{
-        if(type === "dec" && quantity !== 0){
+        if(type === "dec" && quantity !== 1){
             setQuantity(quantity-1);
         }else if(type === "inc" && quantity !== 15 ){
             setQuantity(quantity+1);
@@ -151,7 +154,7 @@ const Product = () => {
     };
 
     const handleAddtoCart =()=>{
-        
+        dispatch(addProduct({ products ,quantity, totalPrice:products.price*quantity,}))
     };
 
     return (
@@ -160,18 +163,18 @@ const Product = () => {
             <Announcement/>
                 <Wrapper>
                     <ImageContainer>
-                        <Image  src={prdct.img}/>
+                        <Image  src={products.img}/>
                     </ImageContainer>
                     <InfoContainer>
-                        <Title>{prdct.title}</Title>
+                        <Title>{products.title}</Title>
                         <Desc>
-                        {prdct.desc}
+                        {products.desc}
                         </Desc>
-                        <Price>R {prdct.price}</Price>
+                        <Price>R {products.price}</Price>
                         <FilterContainer>
                             <Filter>
                                 <FilterTitle>Color</FilterTitle>
-                                {prdct.color?.map((color)=>(
+                                {products.color?.map((color)=>(
 
                                     <FilterColor key={color} color={color} onClick={()=> setColor(color)}/>
 
@@ -180,7 +183,7 @@ const Product = () => {
                             <Filter>
                                 <FilterTitle>Size</FilterTitle>
                                 <FilterSize onChange={(e)=> setSize(e.target.value)}>
-                                {prdct.size?.map((size)=>(
+                                {products.size?.map((size)=>(
                                     
                                     <FilterSizeOption key={size}>{size}</FilterSizeOption>
                                     
