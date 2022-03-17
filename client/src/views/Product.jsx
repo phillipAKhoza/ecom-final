@@ -124,6 +124,7 @@ const Product = () => {
     const prodID = location.pathname.split("/")[2];
 
     const [prdct, setPrdct] = useState({});
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(()=>{
         const  getProduct = async () =>{
@@ -138,6 +139,14 @@ const Product = () => {
         };
         getProduct();
     },[prodID]);
+
+    const handleQty = (type) =>{
+        if(type === "dec" && quantity != 1){
+            setQuantity(quantity-1);
+        }else{
+            setQuantity(quantity+1);
+        }
+    }
 
     return (
         <Container>
@@ -156,7 +165,7 @@ const Product = () => {
                         <FilterContainer>
                             <Filter>
                                 <FilterTitle>Color</FilterTitle>
-                                {prdct.color.map((color)=>(
+                                {prdct.color?.map((color)=>(
 
                                     <FilterColor key={color} color={color}/>
 
@@ -165,7 +174,7 @@ const Product = () => {
                             <Filter>
                                 <FilterTitle>Size</FilterTitle>
                                 <FilterSize>
-                                {prdct.size.map((size)=>(
+                                {prdct.size?.map((size)=>(
                                     
                                     <FilterSizeOption key={size}>{size}</FilterSizeOption>
                                     
@@ -176,9 +185,9 @@ const Product = () => {
                         <AddContainer>
 
                             <AmountContainer>
-                                <Remove/>
-                                <Amount>1</Amount>
-                                <Add/>
+                                <Remove onClick={()=> handleQty("dec")}/>
+                                <Amount>{quantity}</Amount>
+                                <Add onClick={()=> handleQty("inc")}/>
                             </AmountContainer>
                             <Button>ADD TO CART</Button>
                         </AddContainer>
