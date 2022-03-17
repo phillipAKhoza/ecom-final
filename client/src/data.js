@@ -26,20 +26,20 @@ export const categories = [
     {
         id: 1,
         img: "https://i.ibb.co/74PR7K5/pexels-thgusstavo-santana-2114524.jpg",
-        title:"SHIRT STYLE!",
+        title:"MAN FASHION!",
         cat:"male",
     },
     {
         id: 2,
-        img: "https://i.ibb.co/nPwg5LY/pexels-ksenia-chernaya-4740517.jpg",
-        title:"LOUNGEWAER LOVE",
-        cat:"kiddies"
+        img: "https://images.pexels.com/photos/953266/pexels-photo-953266.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        title:"WOMAN FASHION!",
+        cat:"female"
     },
     {
         id: 3,
-        img: "https://i.ibb.co/17GnLKH/pexels-monica-turlui-8055369.jpg",
-        title:"LIGHT JACKETS",
-        cat:"coats"
+        img: "https://images.pexels.com/photos/9400686/pexels-photo-9400686.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        title:"SHOES",
+        cat:"shoes"
     },
 ];
 
