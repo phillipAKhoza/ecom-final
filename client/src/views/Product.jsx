@@ -141,9 +141,9 @@ const Product = () => {
     },[prodID]);
 
     const handleQty = (type) =>{
-        if(type === "dec" && quantity != 1){
+        if(type === "dec" && quantity != 0){
             setQuantity(quantity-1);
-        }else{
+        }else if(type === "inc" && quantity != 15 ){
             setQuantity(quantity+1);
         }
     }
