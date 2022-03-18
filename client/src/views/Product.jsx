@@ -125,7 +125,7 @@ const Product = () => {
     const location = useLocation();
     const prodID = location.pathname.split("/")[2];
 
-    const [products, setPrdct] = useState({});
+    const [products, setProducts] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [size, setSize] = useState("");
     const [color, setColor] = useState("");
@@ -134,9 +134,8 @@ const Product = () => {
     useEffect(()=>{
         const  getProduct = async () =>{
             try {
-                const dta = await publicRequest.get("/products/find/"+prodID);
-                const data = dta.data;
-                setPrdct(data);
+                const data = await publicRequest.get("/products/find/"+prodID);
+                setProducts(data.data);
                
             } catch (error) {
             //    console.log(error) 
@@ -146,15 +145,15 @@ const Product = () => {
     },[prodID]);
 
     const handleQty = (type) =>{
-        if(type == "dec" && quantity !== 1){
+        if(type === "dec" && quantity !== 1){
             setQuantity(quantity-1);
-        }else if(type == "inc" && quantity !== 15 ){
+        }else if(type === "inc" && quantity !== 15 ){
             setQuantity(quantity+1);
         }
     };
 
     const handleAddtoCart =()=>{
-        dispatch(addProduct({ products ,quantity, totalPrice:(products.price*quantity)}))
+        dispatch(addProduct({ ...products , quantity, size, color}))
     };
 
     return (
