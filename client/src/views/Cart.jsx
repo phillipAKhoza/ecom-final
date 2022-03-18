@@ -168,8 +168,6 @@ const Cart = () => {
     const onToken = (token)=>{
         setSToken(token);
     };
-    console.log(sToken);
-    console.log(KEY)
 
     return (
         <Container>
@@ -232,6 +230,7 @@ const Cart = () => {
                         <StripeCheckout
                          name="Phillip-Dev"
                          image="https://www.phillip-dev.com/img/logo.png"
+                         ComponentClass="div"
                          billingAddress
                          shippingAddress
                          description={`Your total is R ${cart.totalPrice}`}
