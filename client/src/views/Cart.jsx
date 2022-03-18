@@ -8,8 +8,6 @@ import { mobile } from "../responsive";
 import StripeCheckout from 'react-stripe-checkout';
 import { useState } from "react";
 
-const KEY = process.env.REACT_APP_STRIPE;
-console.log(KEY)
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -163,7 +161,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
-    
+    const KEY = process.env.REACT_APP_STRIPE;
     const cart = useSelector(state => state.cart);
     const [sToken, setSToken] = useState(null);
 
@@ -171,6 +169,7 @@ const Cart = () => {
         setSToken(token);
     };
     console.log(sToken);
+    console.log(KEY)
 
     return (
         <Container>
@@ -220,15 +219,15 @@ const Cart = () => {
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Delivery</SummaryItemText>
-                            <SummaryItemPrice>R 490.00</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.totalPrice>400? `R 00.00` : `R 250.00`}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Delivery Discount</SummaryItemText>
-                            <SummaryItemPrice>R -90.00</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.totalPrice>400? `R 00.00` : `R 99.99`}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>R {cart.totalPrice}</SummaryItemPrice>
+                            <SummaryItemPrice>R {cart.totalPrice>400? cart.totalPrice : cart.totalPrice+150}</SummaryItemPrice>
                         </SummaryItem>
                         <StripeCheckout
                          name="Phillip-Dev"
