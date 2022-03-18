@@ -139,22 +139,22 @@ const Product = () => {
                 setPrdct(data);
                
             } catch (error) {
-                
+            //    console.log(error) 
             };
         };
         getProduct();
     },[prodID]);
 
     const handleQty = (type) =>{
-        if(type === "dec" && quantity !== 1){
+        if(type == "dec" && quantity !== 1){
             setQuantity(quantity-1);
-        }else if(type === "inc" && quantity !== 15 ){
+        }else if(type == "inc" && quantity !== 15 ){
             setQuantity(quantity+1);
         }
     };
 
     const handleAddtoCart =()=>{
-        dispatch(addProduct({ products ,quantity, totalPrice:products.price*quantity,}))
+        dispatch(addProduct({ products ,quantity, totalPrice:(products.price*quantity)}))
     };
 
     return (

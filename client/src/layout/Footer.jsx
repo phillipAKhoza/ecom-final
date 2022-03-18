@@ -72,9 +72,9 @@ const ContactItem = styled.div`
  align-items: center;
 `;
 
-const Payment = styled.img`
- width: 60%;
-`;
+// const Payment = styled.img`
+//  width: 60%;
+// `;
 
 const Footer = () => {
     return (
