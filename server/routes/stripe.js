@@ -5,7 +5,7 @@ router.post("/payment", (res,req)=>{
     stripe.charges.create({
         source: req.body.tokenId,
         amount: req.bbody.amount,
-        currency: "zar"
+        currency: "usd"
     }, (stripeError , stripeRes)=>{
         if(stripeError){
             res.statusCode(500).json(stripeError);
