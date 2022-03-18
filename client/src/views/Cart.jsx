@@ -5,7 +5,11 @@ import Announcement from "../layout/Announcement";
 import Footer from "../layout/Footer";
 import Navbar from "../layout/Navbar";
 import { mobile } from "../responsive";
+import StripeCheckout from 'react-stripe-checkout';
+import { useState } from "react";
 
+const KEY = process.env.REACT_APP_STRIPE;
+console.log(KEY)
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -161,6 +165,12 @@ const Button = styled.button`
 const Cart = () => {
     
     const cart = useSelector(state => state.cart);
+    const [sToken, setSToken] = useState(null);
+
+    const onToken = (token)=>{
+        setSToken(token);
+    };
+    console.log(sToken);
 
     return (
         <Container>
@@ -220,7 +230,18 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>R {cart.totalPrice}</SummaryItemPrice>
                         </SummaryItem>
+                        <StripeCheckout
+                         name="Phillip-Dev"
+                         image="https://www.phillip-dev.com/img/logo.png"
+                         billingAddress
+                         shippingAddress
+                         description={`Your total is R ${cart.totalPrice}`}
+                         amount={(cart.totalPrice/15)*100}
+                         token={onToken}
+                         stripeKey={KEY}
+                        >
                         <Button>CHECKOUT NOW</Button>
+                        </StripeCheckout>
                     </Summary>
                 </Bottom>
             </Wrapper>
