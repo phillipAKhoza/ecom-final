@@ -1,4 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 import styled from "styled-components"
 import Announcement from "../layout/Announcement";
 import Footer from "../layout/Footer";
@@ -158,6 +159,9 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+    
+    const cart = useSelector(state => state.cart);
+
     return (
         <Container>
             <Navbar/>
@@ -174,51 +178,35 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        <Product>
-                            <ProductInfo>
-                                <Image src="https://cdn.cliqueinc.com/posts/290636/new-pant-trends-2021-290636-1607309167164-main.700x0c.jpg"/>
-                                <Details>
-                                    <ProductName><b>Product:</b> DENIM PANTS</ProductName>
-                                    <ProductId><b>ID:</b> 1234567890</ProductId>
-                                    <ProductColor color="brown"/>
-                                    <ProductSize><b>Size:</b> 37.5</ProductSize>
-                                </Details>
-                            </ProductInfo>
-                            <PricsInfo>
-                                <ProductAmountContainer>
-                                    <Remove/>
-                                        <ProductAmount>2</ProductAmount>
-                                    <Add/>
-                                </ProductAmountContainer>
-                                <ProductPrice>R 599.00</ProductPrice>
-                            </PricsInfo>
-                        </Product>
+                        { cart.products?.map(product =>(
+                            <Product key={product._id}>
+                                <ProductInfo>
+                                    <Image src={product.img} />
+                                    <Details>
+                                        <ProductName><b>Product:</b> {product.title}</ProductName>
+                                        <ProductId><b>ID:</b> {product._id}</ProductId>
+                                        <ProductColor color={product.color}/>
+                                        <ProductSize><b>Size:</b> {product.size}</ProductSize>
+                                    </Details>
+                                </ProductInfo>
+                                <PricsInfo>
+                                    <ProductAmountContainer>
+                                        <Remove/>
+                                            <ProductAmount>{product.quantity}</ProductAmount>
+                                        <Add/>
+                                    </ProductAmountContainer>
+                                    <ProductPrice>R {product.price * product.quantity}</ProductPrice>
+                                </PricsInfo>
+                            </Product>
+                        ))
+                        }
                         <Hr/>
-                        <Product>
-                            <ProductInfo>
-                                <Image src="https://www.cruisefashion.com/images/imgzoom/60/60094952_xxl.jpg"/>
-                                <Details>
-                                    <ProductName><b>Product:</b> JACKET</ProductName>
-                                    <ProductId><b>ID:</b> 1234567890</ProductId>
-                                    <ProductColor color="darkblue"/>
-                                    <ProductSize><b>Size:</b> 37.5</ProductSize>
-                                </Details>
-                            </ProductInfo>
-                            <PricsInfo>
-                                <ProductAmountContainer>
-                                    <Remove/>
-                                        <ProductAmount>1</ProductAmount>
-                                    <Add/>
-                                </ProductAmountContainer>
-                                <ProductPrice>R 799.00</ProductPrice>
-                            </PricsInfo>
-                        </Product>
                     </Info>
                     <Summary>
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>R 1299.00</SummaryItemPrice>
+                            <SummaryItemPrice>R {cart.totalPrice}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Delivery</SummaryItemText>
@@ -230,7 +218,7 @@ const Cart = () => {
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>R 1699.00</SummaryItemPrice>
+                            <SummaryItemPrice>R {cart.totalPrice}</SummaryItemPrice>
                         </SummaryItem>
                         <Button>CHECKOUT NOW</Button>
                     </Summary>
