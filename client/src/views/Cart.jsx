@@ -185,7 +185,7 @@ const Cart = () => {
                 
             };
         };
-        sToken && cart.totalPrice>=1 && makeRequest()
+        sToken && cart.totalPrice>=1 && makeRequest();
     },[sToken,cart.totalPrice, navigate]);
 
     return (
