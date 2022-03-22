@@ -183,8 +183,8 @@ const Cart = () => {
                 console.log("got called")
             } catch (error) {
                 
-            }
-        }
+            };
+        };
         sToken && cart.totalPrice>=1 && makeRequest()
     },[sToken,cart.totalPrice, navigate]);
 
