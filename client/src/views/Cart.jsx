@@ -6,8 +6,9 @@ import Footer from "../layout/Footer";
 import Navbar from "../layout/Navbar";
 import { mobile } from "../responsive";
 import StripeCheckout from 'react-stripe-checkout';
-import { useEffect, useState, useHistory } from "react";
+import { useEffect, useState } from "react";
 import {userRequest} from '../requestAPI';
+import {useNavigate} from 'react-router-dom';
 
 const Container = styled.div``;
 
@@ -164,7 +165,7 @@ const Button = styled.button`
 const Cart = () => {
     const KEY = process.env.REACT_APP_STRIPE;
     const cart = useSelector(state => state.cart);
-    const history = useHistory();
+    const navigate = useNavigate();
     const [sToken, setSToken] = useState(null);
 
     const onToken = (token)=>{
@@ -178,13 +179,13 @@ const Cart = () => {
                     tokenId: sToken.id,
                     amount: cart.totalPrice * 100,
                 });
-                history.push("/success", {data: data.data});
+                navigate.push("/success", {data: data.data});
             } catch (error) {
                 
             }
         }
         sToken && makeRequest()
-    },[sToken,cart.totalPrice, history]);
+    },[sToken,cart.totalPrice, navigate]);
 
     return (
         <Container>
