@@ -179,7 +179,7 @@ const Cart = () => {
                     tokenId: sToken.id,
                     amount: cart.totalPrice * 100,
                 });
-                navigate.push("/success", {data: data.data});
+                navigate("/success", {state: {data: data.data}});
             } catch (error) {
                 
             }
