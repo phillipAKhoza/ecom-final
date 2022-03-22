@@ -179,12 +179,13 @@ const Cart = () => {
                     tokenId: sToken.id,
                     amount: cart.totalPrice * 100,
                 });
-                navigate("/success", {state: {data: data.data}});
+                navigate('/success', {state: {data: data.data}});
+                console.log("got called")
             } catch (error) {
                 
             }
         }
-        sToken && makeRequest()
+        sToken && cart.totalPrice>=1 && makeRequest()
     },[sToken,cart.totalPrice, navigate]);
 
     return (
