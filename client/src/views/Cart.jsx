@@ -175,6 +175,7 @@ const Cart = () => {
     useEffect(()=>{
         const makeRequest = async ()=>{ 
             try{
+                console.log(sToken.id);
                 const token = sToken.id;
                 const res = await userRequest.post("/checkout/payment", {
                     tokenId: token,
@@ -187,7 +188,7 @@ const Cart = () => {
                 console.log(error)
             };
         };
-        sToken?.id && cart.totalPrice>=1 && makeRequest();
+        sToken && cart.totalPrice>=1 && makeRequest();
     },[sToken,cart.totalPrice, navigate]);
 
     return (
