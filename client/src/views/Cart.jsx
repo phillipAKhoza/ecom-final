@@ -173,19 +173,21 @@ const Cart = () => {
     };
 
     useEffect(()=>{
-        const makeRequest = async ()=>{
-            try {
-                const data = await userRequest.post("/checkout/payment", {
-                    tokenId: sToken.id,
+        const makeRequest = async ()=>{ 
+            try{
+                const token = sToken.id;
+                const res = await userRequest.post("/checkout/payment", {
+                    tokenId: token,
                     amount: cart.totalPrice * 100,
                 });
-                navigate('/success', {state: {data: data.data}});
+                navigate('/success', {data: res.data});
                 console.log("got called")
-            } catch (error) {
                 
+            } catch (error) {
+                console.log(error)
             };
         };
-        sToken && cart.totalPrice>=1 && makeRequest();
+        sToken?.id && cart.totalPrice>=1 && makeRequest();
     },[sToken,cart.totalPrice, navigate]);
 
     return (
@@ -246,18 +248,21 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>R {cart.totalPrice>400? cart.totalPrice : cart.totalPrice+150}</SummaryItemPrice>
                         </SummaryItem>
-                        <StripeCheckout
-                         name="Phillip-Dev"
-                         image="https://www.phillip-dev.com/img/logo1.png"
-                         billingAddress
-                         shippingAddress
-                         description={`Your total is R ${cart.totalPrice}`}
-                         amount={(cart.totalPrice/15)*100}
-                         token={onToken}
-                         stripeKey={KEY}
-                        >
-                        <Button>CHECKOUT NOW</Button>
-                        </StripeCheckout>
+                        {sToken? (<span>Processing. Please wait...</span>):(
+
+                            <StripeCheckout
+                            name="Phillip-Dev"
+                            image="https://www.phillip-dev.com/img/logo1.png"
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is R ${cart.totalPrice}`}
+                            amount={(cart.totalPrice/15)*100}
+                            token={onToken}
+                            stripeKey={KEY}
+                            >
+                             <Button>CHECKOUT NOW</Button>
+                            </StripeCheckout>
+                        )}
                     </Summary>
                 </Bottom>
             </Wrapper>
